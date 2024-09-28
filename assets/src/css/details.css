@@ -1,0 +1,85 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.go-back {
+    display: inline-block;
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.character-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.character-header img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.character-header h2 {
+    font-size: 28px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.details-container {
+    display: flex; /* Flexbox para alinhar as seções lado a lado */
+    justify-content: space-between;
+    width: 100%; /* Para ocupar toda a largura */
+    margin-top: 30px;
+}
+
+.info-section, .episodes-section {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 10px; /* Espaçamento entre as seções */
+}
+
+.info-section h3, .episodes-section h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.episodes-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.episodes-section li {
+    margin-bottom: 15px;
+}
+
+/* Ajuste para responsividade */
+@media (max-width: 768px) {
+    .details-container {
+        flex-direction: column; /* Empilha as seções em dispositivos menores */
+    }
+
+    .info-section, .episodes-section {
+        margin-bottom: 20px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}

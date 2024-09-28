@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/src/css/style.css" >
+    <link rel="stylesheet" href="/assets/src/css/style-api.css" >
+    <title>Document</title>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#characters">
+            <img src="assets/src/img/logo-black.svg" alt="Rick & Morty Logo" class="navbar-logo">
+        </a>
+        <div class="nav-links">
+            <a href="#characters">Characters</a>
+            <a href="#locations">Locations</a>
+            <a href="#episodes">Episodes</a>
+        </div>
+    </div>
+
+    <!-- Container Principal -->
+    <div class="container">
+
+        <!-- Logo Centralizado -->
+        <img src="/assets/src/img/rickMorty.svg" alt="Rick & Morty Logo" class="logo">
+
+        <!-- Filtros -->
+        <div class="filters">
+            <input type="text" placeholder="Filter by name..." id="nameFilter">
+            <select id="speciesFilter">
+                <option value="">Species</option>
+                <option value="human">Human</option>
+                <option value="alien">Alien</option>
+                <!-- Adicione outras opções conforme necessário -->
+            </select>
+
+            <select id="genderFilter">
+                <option value="">Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <!-- Adicione outras opções conforme necessário -->
+            </select>
+
+            <select id="statusFilter">
+                <option value="">Status</option>
+                <option value="alive">Alive</option>
+                <option value="dead">Dead</option>
+                <option value="unknown">Unknown</option>
+            </select>
+        </div>
+   
+   
+   
+   
+   
+   
+    <ul id="apiList"></ul>
+    
+
+
+    <button id="button"> LOAD MORE </button>
+</body>
+<script src="/assets/src/js/script.js"></script>
+<script src="assets/src/js/filters.js"></script>
+</html>

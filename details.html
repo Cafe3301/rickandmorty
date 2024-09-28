@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Personagem</title>
+    <link rel="stylesheet" href="/assets/src/css/style.css"> <!-- Verifique o caminho -->
+    <link rel="stylesheet" href="/assets/src/css/details.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="#characters">
+            <img src="assets/src/img/logo-black.svg" alt="Rick & Morty Logo" class="navbar-logo">
+        </a>
+        <div class="nav-links">
+            <a href="#characters">Characters</a>
+            <a href="#locations">Locations</a>
+            <a href="#episodes">Episodes</a>
+        </div>
+    </div>
+    <div class="container">
+        <a href="index.html" class="go-back">← Go Back</a>
+
+        <section id="characterDetails" class="character-details">
+            <header id="characterHeader" class="character-header">
+                <img id="characterImage" alt="Character Image">
+                <h2 id="characterName">Character Name</h2>
+            </header>
+
+            <!-- Novo elemento pai para as seções -->
+            <div class="details-container">
+                <section class="info-section">
+                    <h3>Informations</h3>
+                    <p id="gender"></p>
+                    <p id="status"></p>
+                    <p id="species"></p>
+                    <p id="origin"></p>
+                    <p id="type"></p>
+                    <p id="location"></p>
+                </section>
+
+                <section class="episodes-section">
+                    <h3>Episodes</h3>
+                    <ul id="episodeList"></ul>
+                </section>
+            </div>
+        </section>
+    </div>
+
+    <script src="/assets/src/js/details.js"></script> <!-- Verifique o caminho -->
+</body>
+</html>
