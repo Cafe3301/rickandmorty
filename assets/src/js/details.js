@@ -1,50 +1,57 @@
-const urlParams = new URLSearchParams(window.location.search);
-const characterId = urlParams.get('id');
+let characters = []; // Variável global para armazenar personagens
+let page = 1; 
+const urlBase = 'https://rickandmortyapi.com/api/character/';
+const rickandmorty = document.getElementById('apiList');
 
-async function fetchCharacterDetails() {
-    const response = await fetch(`https://rickandmortyapi.com/api/character/${characterId}`);
-    if (response.ok) {
-        const character = await response.json();
-        displayCharacterDetails(character);
-        fetchEpisodes(character.episode); // Busca episódios relacionados
-    } else {
-        console.error('Erro ao buscar detalhes do personagem:', response.status);
-    }
-}
+async function chamarApi(url) {
+    const api = await fetch(url);
 
-function displayCharacterDetails(character) {
-    // Preenche as informações do personagem
-    document.getElementById('characterImage').src = character.image;
-    document.getElementById('characterName').textContent = character.name;
+    if (api.status === 200) {
+        const arquivos = await api.json();
+        const resultados = arquivos.results;
 
-    document.getElementById('gender').textContent = `Gender: ${character.gender}`;
-    document.getElementById('status').textContent = `Status: ${character.status}`;
-    document.getElementById('species').textContent = `Species: ${character.species}`;
-    document.getElementById('origin').textContent = `Origin: ${character.origin.name}`;
-    document.getElementById('type').textContent = `Type: ${character.type || 'Unknown'}`;
-    document.getElementById('location').textContent = `Location: ${character.location.name}`;
-}
+        characters = resultados; // Armazena personagens para filtro
 
-async function fetchEpisodes(episodeUrls) {
-    // Limitar a 5 episódios
-    const limitedEpisodeUrls = episodeUrls.slice(0, 5);
-    
-    const episodeList = document.getElementById('episodeList');
-    episodeList.innerHTML = ''; // Limpa a lista atual
+        rickandmorty.innerHTML = ''; // Limpa a lista anterior
 
-    for (const episodeUrl of limitedEpisodeUrls) {
-        const response = await fetch(episodeUrl);
-        if (response.ok) {
-            const episode = await response.json();
+        for (const characterData of resultados) {
+            const characterElement = document.createElement('div');
+            characterElement.classList.add('card');
 
-            const episodeItem = document.createElement('li');
-            episodeItem.innerHTML = `<strong>${episode.episode}</strong>: ${episode.name} (${episode.air_date})`;
-            episodeList.appendChild(episodeItem);
-        } else {
-            console.error('Erro ao buscar detalhes do episódio:', response.status);
+            // Adicionando evento de clique para redirecionar
+            characterElement.addEventListener('click', () => {
+                window.location.href = `details.html?id=${characterData.id}`;
+            });
+
+            const imageDiv = document.createElement('div');
+            const imageUrl = `https://rickandmortyapi.com/api/character/avatar/${characterData.id}.jpeg`;
+            const image = document.createElement('img');
+            image.src = imageUrl;
+            image.alt = characterData.name;
+            imageDiv.appendChild(image);
+
+            const infoDiv = document.createElement('div');
+            const infoSection = document.createElement('section');
+            const nameParagraph = document.createElement('p');
+            nameParagraph.classList.add('paragraph');
+            nameParagraph.textContent = characterData.name;
+
+            const statusParagraph = document.createElement('p');
+            statusParagraph.classList.add(characterData.status === 'Alive' ? 'status-alive' : characterData.status === 'Dead' ? 'status-dead' : 'status-unknown');
+            statusParagraph.textContent = `Status: ${characterData.status};`;
+
+            infoSection.appendChild(nameParagraph);
+            infoSection.appendChild(statusParagraph);
+
+            infoDiv.appendChild(infoSection);
+            characterElement.appendChild(imageDiv);
+            characterElement.appendChild(infoDiv);
+            rickandmorty.appendChild(characterElement);
         }
+    } else {
+        console.error('Erro ao chamar a API:', api.status);
     }
 }
 
-// Chama a função
-fetchCharacterDetails();
+// Chama a API ao iniciar
+chamarApi(`${urlBase}?page=${page}`);
